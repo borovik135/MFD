@@ -63,7 +63,10 @@ class MFD():
             histogram = np.concatenate(histograms_window)
 
             # Normalize the histogram to unit length
-            histogram = histogram / np.linalg.norm(histogram)
+            dnm = np.linalg.norm(histogram)
+            
+            if dnm: histogram = histogram / dnm
+            else: print(f'warning: invalid hist norm={dnm} at {i}th keypoint')
 
             descriptors[i] = histogram
 
